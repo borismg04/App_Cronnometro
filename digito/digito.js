@@ -1,0 +1,59 @@
+import style from './estilos.js';
+import html from './template.js';
+import numeros from './numero.js';
+
+class Digito extends HTMLElement {
+  constructor() {
+    super();
+    let shadowRoot = this.attachShadow({ mode: "open" });
+    shadowRoot.innerHTML = `<style>${style}</style>${html}`;
+    this._contenedorDigito =
+      this.shadowRoot.querySelector("#contenedor-digito");
+  }
+
+  connectedCallback() {
+    this.numero = 9;
+    setInterval(() => {
+      this.avanzar(this.numero);
+    }, 100);
+  }
+
+  get numero() {
+    return parseFloat(this.getAttribute("numero"));
+  }
+
+  avanzar(numero) {
+    this.numero = numero === 9 ? 0 : numero + 1;
+  }
+
+  set numero(numero) {
+    this.setAttribute("numero", numero);
+  }
+
+  static get observedAttributes() {
+    return ["numero"];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    switch (name) {
+      case "numero":
+        if (oldValue !== newValue) {
+          this.renderNumero();
+        }
+        break;
+    }
+  }
+
+  renderNumero() {
+    Array.from(this._contenedorDigito.children).forEach((element) => {
+      element.classList.add("white");
+    });
+    numeros.get(this.numero).forEach((indentificador) => {
+      this._contenedorDigito
+        .querySelector(`#${indentificador}`)
+        .classList.remove("white");
+    });
+  }
+}
+
+export default Digito;
