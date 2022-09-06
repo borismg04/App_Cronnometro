@@ -7,15 +7,14 @@ class Digito extends HTMLElement {
     super();
     let shadowRoot = this.attachShadow({ mode: "open" });
     shadowRoot.innerHTML = `<style>${style}</style>${html}`;
-    this._contenedorDigito =
-      this.shadowRoot.querySelector("#contenedor-digito");
+    this._contenedorDigito =this.shadowRoot.querySelector("#contenedor-digito");
   }
 
   connectedCallback() {
-    this.numero = 9;
-    setInterval(() => {
-      this.avanzar(this.numero);
-    }, 100);
+    this.numero = 0;
+    // setInterval(() => {
+    //   this.avanzar(this.numero);
+    // }, 100);
   }
 
   get numero() {
@@ -37,21 +36,18 @@ class Digito extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     switch (name) {
       case "numero":
-        if (oldValue !== newValue) {
+        if (oldValue != newValue) {
           this.renderNumero();
         }
-        break;
     }
   }
 
   renderNumero() {
-    Array.from(this._contenedorDigito.children).forEach((element) => {
-      element.classList.add("white");
+    Array.from(this._contenedorDigito.children).forEach((child) => {
+      child.classList.add("white");
     });
-    numeros.get(this.numero).forEach((indentificador) => {
-      this._contenedorDigito
-        .querySelector(`#${indentificador}`)
-        .classList.remove("white");
+    numeros.get(this.numero).forEach((identificador) => {
+      this._contenedorDigito.querySelector(`#${identificador}`).classList.remove("white");
     });
   }
 }
