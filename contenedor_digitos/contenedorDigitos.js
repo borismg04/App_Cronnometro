@@ -6,17 +6,23 @@ class contenedorDigitos extends HTMLElement {
     let shadowRoot = this.attachShadow({mode: 'open'});
     shadowRoot.innerHTML = `<style>${style}</style>`+'<slot></slot>';
     this.contador = 0;
+    this.actualizarTiempo = this.actualizarTiempo.bind(this);
   }
 
   connectedCallback(){
-    setInterval(() => {
-      this.contador++;
-      this.actualizarTiempo();
-    }, 10);
+    // setInterval(() => {
+    //   this.contador++;
+    //   this.actualizarTiempo();
+    // }, 10);
+    document.body.addEventListener('actualizarTiempo', this.actualizarTiempo);
   };
 
-  actualizarTiempo(){
-    let tiempo= this.formatearTiempo(this.contador);
+  disconnectedCallback(){
+    document.body.removeEventListener('actualizarTiempo', this.actualizarTiempo);
+  }
+
+  actualizarTiempo(event){
+    let tiempo= this.formatearTiempo(event.detail.contador);
 
     this.querySelector("#decenasHoras").numero = Math.floor(tiempo.horas / 10);
     this.querySelector("#horas").numero = Math.floor(tiempo.horas % 10);

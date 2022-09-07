@@ -20,18 +20,47 @@ class Crono extends HTMLElement {
     contenedorBotones.appendChild(this.botonReiniciar);
 
     shadowRoot.appendChild(contenedorBotones);
+
+    this.contador = 0;
+
+    this.iniciarPausarClick = this.iniciarPausarClick.bind(this);
+    this.reiniciarClick = this.reiniciarClick.bind(this);
   }
   connectedCallback(){
     this.botonIniciarPausar.titulo = "Iniciar";
     this.botonReiniciar.titulo = "Reiniciar";
 
-    this.botonIniciarPausar.addEventListener("customClick", (event) => {
-      this.iniciarPausar();
-    });
+    this.botonIniciarPausar.addEventListener('customClick',this.iniciarPausarClick);
+    this.botonReiniciar.addEventListener('customClick',this.reiniciarClick);
+  };
 
-    this.botonReiniciar.addEventListener("customClick", (event) => {
-      this.reiniciar();
-    });
+  iniciarPausarClick(event){
+    if (event.detail.titulo === "Iniciar") {
+      this.intervalo = setInterval(() => {
+        this.contador++;
+        this.dispatchEvent( new CustomEvent('actualizarTiempo', {
+          bubbles: true,
+          detail: {
+            contador: this.contador
+          }
+        }));
+      }, 10);
+      this.botonIniciarPausar.titulo = "Pausar";
+    }else{
+      clearInterval(this.intervalo);
+      this.botonIniciarPausar.titulo = "Iniciar";
+    }
+    event.stopPropagation();
+  };
+  reiniciarClick(event){
+    this.contador = 0;
+    this.dispatchEvent( new CustomEvent('actualizarTiempo', {
+      bubbles: true,
+      detail: {
+        contador: this.contador
+      }
+    }));
+    event.stopPropagation();
   };
 }
 
