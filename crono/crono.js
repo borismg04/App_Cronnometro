@@ -25,13 +25,13 @@ class Crono extends HTMLElement {
     this.botonIniciarPausar.titulo = "Iniciar";
     this.botonReiniciar.titulo = "Reiniciar";
 
-    // this.botonIniciarPausar.addEventListener("customClick", (event) => {
-    //   this.iniciarPausar();
-    // });
+    this.botonIniciarPausar.addEventListener("customClick", (event) => {
+      this.iniciarPausar();
+    });
 
-    // this.botonReiniciar.addEventListener("customClick", (event) => {
-    //   this.reiniciar();
-    // });
+    this.botonReiniciar.addEventListener("customClick", (event) => {
+      this.reiniciar();
+    });
   };
 }
 
