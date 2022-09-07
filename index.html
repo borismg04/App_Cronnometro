@@ -8,33 +8,28 @@
     <script type="module" src="main.js"></script>
 </head>
   <body>
-    <wc-contenedor-digitos>
-
-      <wc-digito id="decenasHoras" numero="0"></wc-digito>
-      <wc-digito id="horas" numero="0"></wc-digito>
-
-      <wc-puntos></wc-puntos>
-      
-      <wc-digito id="decenasMinutos" numero="0"></wc-digito>
-      <wc-digito id="minutos" numero="0"></wc-digito>
-
-      <wc-puntos></wc-puntos>
-      
-      <wc-digito id="decenasSegundos" numero="0"></wc-digito>
-      <wc-digito id="segundos" numero="0"></wc-digito>
-
-      <wc-puntos></wc-puntos>
-      
-      <wc-digito id="decenasCentesimas" numero="0"></wc-digito>
-      <wc-digito id="centesimas" numero="0"></wc-digito>
-    </wc-contenedor-digitos>
-    <wc-boton titulo="Iniciar"></wc-boton>
-    <wc-boton titulo="Reiniciar"></wc-boton>
-
-    <script>
-      window.addEventListener('customClick',(event)=>{
-        console.log(event.detail.titulo);
-      })
-    </script>
+    <wc-crono>
+      <wc-contenedor-digitos>
+  
+        <wc-digito id="decenasHoras" numero="0"></wc-digito>
+        <wc-digito id="horas" numero="0"></wc-digito>
+  
+        <wc-puntos></wc-puntos>
+        
+        <wc-digito id="decenasMinutos" numero="0"></wc-digito>
+        <wc-digito id="minutos" numero="0"></wc-digito>
+  
+        <wc-puntos></wc-puntos>
+        
+        <wc-digito id="decenasSegundos" numero="0"></wc-digito>
+        <wc-digito id="segundos" numero="0"></wc-digito>
+  
+        <wc-puntos></wc-puntos>
+        
+        <wc-digito id="decenasCentesimas" numero="0"></wc-digito>
+        <wc-digito id="centesimas" numero="0"></wc-digito>
+  
+      </wc-contenedor-digitos>
+    </wc-crono>
   </body>
 </html>
